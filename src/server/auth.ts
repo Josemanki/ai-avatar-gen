@@ -8,6 +8,7 @@ import DiscordProvider from "next-auth/providers/discord";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { env } from "../env.mjs";
 import { prisma } from "./db";
+import { stripe } from "./stripe/client";
 
 /**
  * Module augmentation for `next-auth` types.
@@ -63,6 +64,22 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      **/
   ],
+  events: {
+    createUser: async ({ user }) => {
+      await stripe.customers
+        .create({
+          email: user.email!,
+        })
+        .then(async (customer) => {
+          return prisma.user.update({
+            where: { id: user.id },
+            data: {
+              stripeCustomerId: customer.id,
+            },
+          });
+        });
+    },
+  },
 };
 
 /**

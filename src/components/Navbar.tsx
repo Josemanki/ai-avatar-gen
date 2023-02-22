@@ -3,12 +3,16 @@ import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { api } from "../utils/api";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const { data: sessionData } = useSession();
   const { data: currentUser } = api.user.currentUser.useQuery(undefined, {
     enabled: !!sessionData,
   });
+  const { mutateAsync: createCheckoutSession } =
+    api.stripe.createCheckoutSession.useMutation();
+  const { push } = useRouter();
 
   return (
     <nav className="bg-base-50 navbar self-start">
@@ -49,7 +53,17 @@ const Navbar = () => {
               <li className="divider"></li>
               <li>
                 {currentUser && (
-                  <a className="btn-primary btn">{"Buy Credits"}</a>
+                  <a
+                    className="btn-primary btn"
+                    onClick={async () => {
+                      const { checkoutUrl } = await createCheckoutSession();
+                      if (checkoutUrl) {
+                        push(checkoutUrl);
+                      }
+                    }}
+                  >
+                    {"Buy Credits"}
+                  </a>
                 )}
               </li>
               <li>
@@ -84,7 +98,17 @@ const Navbar = () => {
         {currentUser && (
           <>
             <span>Credits: {currentUser.credits}</span>
-            <a className="btn-primary btn">{"Buy Credits"}</a>
+            <a
+              className="btn-primary btn"
+              onClick={async () => {
+                const { checkoutUrl } = await createCheckoutSession();
+                if (checkoutUrl) {
+                  push(checkoutUrl);
+                }
+              }}
+            >
+              {"Buy Credits"}
+            </a>
           </>
         )}
         <button
