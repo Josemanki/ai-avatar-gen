@@ -1,14 +1,14 @@
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import RadioInput from "../components/RadioInput";
+import { api } from "../utils/api";
 import {
   avatarColors,
   avatarShapes,
   avatarStyles,
   generateFormDefaultState,
 } from "../utils/constants";
-import { api } from "../utils/api";
 
 export type TFormState = {
   prompt: string;
@@ -41,6 +41,7 @@ const Generate: NextPage = () => {
     refetch();
   };
 
+  const utils = api.useContext();
   const { data: sessionData } = useSession();
   const {
     data: generateResult,
@@ -49,6 +50,9 @@ const Generate: NextPage = () => {
     refetch,
   } = api.generate.generate.useQuery(formState, {
     enabled: false,
+    onSuccess() {
+      utils.user.currentUser.invalidate();
+    },
   });
 
   const isGenerateLoading =
@@ -146,12 +150,12 @@ const Generate: NextPage = () => {
               Your avatars:
             </h2>
             <div className="grid grid-cols-3 gap-4">
-              {generateResult.map((item) => {
+              {generateResult.map((image) => {
                 return (
                   <img
-                    key={item.url}
+                    key={image.b64_json}
                     className="rounded-3xl"
-                    src={item.url}
+                    src={`data:image/png;base64, ${image.b64_json}`}
                     alt="Alt"
                   />
                 );

@@ -51,7 +51,7 @@ model User {
   sessions         Session[]
   credits          Int       @default(5)
   stripeCustomerId String?   @unique
-  orders           Order[]
+  avatars          Avatar[]
 }
 
 model VerificationToken {
@@ -63,17 +63,17 @@ model VerificationToken {
 }
 
 model Product {
-  id          String  @id @default(cuid())
+  id          String @id @default(cuid())
   title       String
   description String
   price       Int
-  orders      Order[]
 }
 
-model Order {
-  id        String    @id @default(cuid())
-  userId    String
-  createdAt DateTime  @default(now())
-  products  Product[]
-  user      User      @relation(fields: [userId], references: [id])
+model Avatar {
+  id         String   @id @default(cuid())
+  userId     String
+  createdAt  DateTime @default(now())
+  highResURL String
+  lowResURL  String
+  user       User     @relation(fields: [userId], references: [id])
 }

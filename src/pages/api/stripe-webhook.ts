@@ -5,6 +5,7 @@ import type Stripe from "stripe";
 import { buffer } from "micro";
 import { handleSuccessfulPayment } from "../../server/stripe/stripe-webhook-handlers";
 import { stripe } from "../../server/stripe/client";
+import { env } from "../../env.mjs";
 
 // Stripe requires the raw body to construct the event.
 export const config = {
@@ -13,7 +14,7 @@ export const config = {
   },
 };
 
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+const webhookSecret = env.STRIPE_WEBHOOK_SECRET;
 
 export default async function handler(
   req: NextApiRequest,

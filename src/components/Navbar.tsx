@@ -14,6 +14,12 @@ const Navbar = () => {
     api.stripe.createCheckoutSession.useMutation();
   const { push } = useRouter();
 
+  const handleGetCredits = async (priceId: string) => {
+    const { checkoutUrl } = await createCheckoutSession(priceId);
+    if (checkoutUrl) {
+      push(checkoutUrl);
+    }
+  };
   return (
     <nav className="bg-base-50 navbar self-start">
       <div className="navbar-start">
@@ -55,12 +61,9 @@ const Navbar = () => {
                 {currentUser && (
                   <a
                     className="btn-primary btn"
-                    onClick={async () => {
-                      const { checkoutUrl } = await createCheckoutSession();
-                      if (checkoutUrl) {
-                        push(checkoutUrl);
-                      }
-                    }}
+                    onClick={() =>
+                      handleGetCredits("price_1MeQ4oE3Wv1FtO4psJEOuIUp")
+                    }
                   >
                     {"Buy Credits"}
                   </a>
@@ -100,12 +103,7 @@ const Navbar = () => {
             <span>Credits: {currentUser.credits}</span>
             <a
               className="btn-primary btn"
-              onClick={async () => {
-                const { checkoutUrl } = await createCheckoutSession();
-                if (checkoutUrl) {
-                  push(checkoutUrl);
-                }
-              }}
+              onClick={() => handleGetCredits("price_1MeQ4oE3Wv1FtO4psJEOuIUp")}
             >
               {"Buy Credits"}
             </a>

@@ -1,4 +1,4 @@
 # Todos
 
-- Generate a credit system as a user field, initially as just a field I can manually edit.
-- Integrate a Stripe test checkout system that will allow me to top-up credits.
+- Turn images back to 1024x1024, then scale them down for saving actually resized images to S3.
+- Build "My Avatars" section.
