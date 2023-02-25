@@ -49,6 +49,9 @@ const Navbar = () => {
               <Link href="generate">Generate</Link>
             </li>
             <li>
+              <Link href="my-avatars">My Avatars</Link>
+            </li>
+            <li>
               <Link href="community">Community</Link>
             </li>
             <li className="divider"></li>
@@ -60,7 +63,7 @@ const Navbar = () => {
               <li>
                 {currentUser && (
                   <a
-                    className="btn-primary btn"
+                    className="btn-primary btn text-white"
                     onClick={() =>
                       handleGetCredits("price_1MeQ4oE3Wv1FtO4psJEOuIUp")
                     }
@@ -91,6 +94,9 @@ const Navbar = () => {
         <ul className="menu menu-horizontal space-x-2 px-1">
           <li>
             <Link href="generate">Generate</Link>
+          </li>
+          <li>
+            <Link href="my-avatars">My Avatars</Link>
           </li>
           <li>
             <Link href="community">Community</Link>

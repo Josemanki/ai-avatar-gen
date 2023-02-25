@@ -39,6 +39,21 @@ export const generateRouter = createTRPCRouter({
   generate: protectedProcedure
     .input(GenerateInput)
     .query(async ({ input, ctx }) => {
+      await ctx.prisma.$transaction(async (tx) => {
+        const sender = await tx.user.update({
+          where: {
+            id: ctx.session.user.id,
+          },
+          data: {
+            credits: { decrement: input.amount },
+          },
+        });
+
+        if (sender.credits < 0) {
+          throw new Error("Not enough credits!");
+        }
+      });
+
       const response = await openai.createImage({
         prompt: generatePrompt(input),
         n: input.amount,
@@ -82,20 +97,12 @@ export const generateRouter = createTRPCRouter({
         await ctx.prisma.avatar.create({
           data: {
             userId: ctx.session.user.id,
+            prompt: input.prompt,
             lowResURL: lowResUuid,
             highResURL: highResUuid,
           },
         });
       }
-
-      await ctx.prisma.user.update({
-        where: {
-          id: ctx.session.user.id,
-        },
-        data: {
-          credits: { decrement: input.amount },
-        },
-      });
 
       return image_urls;
     }),

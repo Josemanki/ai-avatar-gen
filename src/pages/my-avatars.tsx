@@ -1,45 +1,42 @@
 import { NextPage } from "next";
 import Link from "next/link";
-import React from "react";
 import Grid from "../components/Grid";
 import Spinner from "../components/Spinner";
 import { env } from "../env.mjs";
 import { api } from "../utils/api";
 
-const Community: NextPage = () => {
-  const { data: communityAvatars, isLoading: isCommunityAvatarsLoading } =
-    api.avatars.getCommunityAvatars.useQuery();
+const MyAvatars: NextPage = () => {
+  const { data: avatars, isLoading: isAvatarsLoading } =
+    api.avatars.getUserAvatars.useQuery();
   return (
     <main className="mx-auto flex flex-col">
       <>
-        <h1 className="text-3xl font-bold text-white">Community Icons</h1>
+        <h1 className="text-3xl font-bold text-white">Your Avatars</h1>
         <h2 className="text-md mt-2 text-white">
-          Let's find out what the community has made!
+          Your beautiful creations in one place!
         </h2>
       </>
-      {isCommunityAvatarsLoading ? (
+      {isAvatarsLoading ? (
         <div className="flex h-40 items-center justify-center">
           <Spinner />
         </div>
-      ) : communityAvatars && !communityAvatars.length ? (
+      ) : avatars && !avatars.length ? (
         <p className="mt-8 text-center text-white">
-          The community still hasn't generated any avatars, do you want to be
-          the first to{" "}
+          You don't have any avatars yet, you might want to go{" "}
           <Link className="link" href={"generate"}>
-            generate some?
+            generate some!
           </Link>
         </p>
       ) : (
-        communityAvatars && (
+        avatars && (
           <Grid>
-            {communityAvatars.map((image) => {
+            {avatars.map((image) => {
               return (
                 <img
                   key={image.lowResURL}
                   className="rounded-3xl"
                   src={`${env.NEXT_PUBLIC_AWS_BUCKET_URL}/low-res/${image.lowResURL}`}
                   alt={image.prompt}
-                  title={image.prompt}
                 />
               );
             })}
@@ -50,4 +47,4 @@ const Community: NextPage = () => {
   );
 };
 
-export default Community;
+export default MyAvatars;

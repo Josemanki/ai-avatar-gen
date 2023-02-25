@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
+import Grid from "../components/Grid";
 import RadioInput from "../components/RadioInput";
 import { api } from "../utils/api";
 import {
@@ -59,7 +60,7 @@ const Generate: NextPage = () => {
     generateInitialLoading || generateFetchStatus === "fetching";
 
   return (
-    <main className="mx-auto mt-8 flex flex-col">
+    <main className="mx-auto flex flex-col">
       <>
         <h1 className="text-3xl font-bold text-white">
           Configure your prompts
@@ -149,18 +150,18 @@ const Generate: NextPage = () => {
             <h2 className="my-8 text-center text-2xl text-white">
               Your avatars:
             </h2>
-            <div className="grid grid-cols-3 gap-4">
+            <Grid>
               {generateResult.map((image) => {
                 return (
                   <img
                     key={image.b64_json}
-                    className="rounded-3xl"
+                    className="basis-1/6 rounded-3xl"
                     src={`data:image/png;base64, ${image.b64_json}`}
-                    alt="Alt"
+                    alt="Generated image"
                   />
                 );
               })}
-            </div>
+            </Grid>
           </>
         )}
       </>

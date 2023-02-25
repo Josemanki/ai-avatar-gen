@@ -72,6 +72,7 @@ model Product {
 model Avatar {
   id         String   @id @default(cuid())
   userId     String
+  prompt     String
   createdAt  DateTime @default(now())
   highResURL String
   lowResURL  String

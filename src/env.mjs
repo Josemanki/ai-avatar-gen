@@ -39,6 +39,7 @@ const client = z.object({
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
   NEXT_PUBLIC_AWS_S3_BUCKET_NAME: z.string(),
+  NEXT_PUBLIC_AWS_BUCKET_URL: z.string().url(),
 });
 
 /**
@@ -63,6 +64,7 @@ const processEnv = {
   APP_AWS_REGION: process.env.APP_AWS_REGION,
   AWS_S3_BUCKET_NAME: process.env.AWS_S3_BUCKET_NAME,
   NEXT_PUBLIC_AWS_S3_BUCKET_NAME: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
+  NEXT_PUBLIC_AWS_BUCKET_URL: process.env.NEXT_PUBLIC_AWS_BUCKET_URL,
 };
 
 // Don't touch the part below

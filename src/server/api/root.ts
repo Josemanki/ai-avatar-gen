@@ -3,6 +3,7 @@ import { generateRouter } from "./routers/generateRouter";
 import { userRouter } from "./routers/userRouter";
 import { stripeRouter } from "./routers/stripeRouter";
 import { s3Router } from "./routers/s3Router";
+import { avatarRouter } from "./routers/avatarRouter";
 
 /**
  * This is the primary router for your server.
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   generate: generateRouter,
   stripe: stripeRouter,
   s3: s3Router,
+  avatars: avatarRouter,
 });
 
 // export type definition of API
