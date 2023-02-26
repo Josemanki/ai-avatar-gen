@@ -1,10 +1,11 @@
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 
 const UnauthedNavbar = () => {
   return (
-    <nav className="bg-base-50 navbar self-start">
-      <div className="navbar-start">
+    <nav className="bg-base-50 navbar self-start lg:px-16">
+      <div className="navbar-start w-screen sm:w-1/2">
         {/* Navbar dropdown for mobile */}
         <div className="dropdown">
           <label tabIndex={0} className="btn-ghost btn lg:hidden">
@@ -46,11 +47,18 @@ const UnauthedNavbar = () => {
         {/* Dropdown ends */}
 
         {/* Desktop view starts */}
-        <Link href="/" className="btn-ghost btn text-xl normal-case">
-          AI Gen
+        <Link href="/" className="flex h-16 items-center text-xl normal-case">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="mr-2 rounded-xl"
+          />
+          Avatar AI
         </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden md:flex">
         <ul className="menu menu-horizontal space-x-2 px-1">
           <li>
             <Link href="generate">Generate</Link>

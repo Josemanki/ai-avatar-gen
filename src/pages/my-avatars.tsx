@@ -38,6 +38,7 @@ const MyAvatars: NextPage = () => {
                   className="rounded-3xl"
                   src={`${env.NEXT_PUBLIC_AWS_BUCKET_URL}/low-res/${image.lowResURL}`}
                   alt={image.prompt}
+                  title={image.prompt}
                 />
               );
             })}

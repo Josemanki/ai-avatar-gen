@@ -1,5 +1,6 @@
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { api } from "../utils/api";
@@ -25,8 +26,8 @@ const AuthedNavbar = ({ sessionData }: Props) => {
   };
 
   return (
-    <nav className="bg-base-50 navbar self-start">
-      <div className="navbar-start">
+    <nav className="bg-base-50 navbar self-start lg:px-12">
+      <div className="navbar-start w-screen sm:w-1/2">
         {/* Navbar dropdown for mobile */}
         <div className="dropdown">
           <label tabIndex={0} className="btn-ghost btn lg:hidden">
@@ -78,7 +79,7 @@ const AuthedNavbar = ({ sessionData }: Props) => {
               </li>
               <li>
                 <button
-                  className="btn"
+                  className="btn-primary btn"
                   onClick={sessionData ? () => signOut() : () => signIn()}
                 >
                   {sessionData ? "Sign Out" : "Sign In"}
@@ -90,8 +91,15 @@ const AuthedNavbar = ({ sessionData }: Props) => {
         {/* Dropdown ends */}
 
         {/* Desktop view starts */}
-        <Link href="/" className="btn-ghost btn text-xl normal-case">
-          AI Gen
+        <Link href="/" className="flex h-16 items-center text-xl normal-case">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="mr-2 rounded-xl"
+          />
+          Avatar AI
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

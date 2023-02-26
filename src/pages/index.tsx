@@ -13,7 +13,7 @@ const Home: NextPage = () => {
             This application will let you generate exciting avatars using AI,
             just imagine what you want, and it'll know what to show!
           </p>
-          <Link href={"generate"} className="btn-secondary btn">
+          <Link href={"generate"} className="btn-primary btn">
             Get Started
           </Link>
         </div>
