@@ -1,3 +1,3 @@
 # Todos
 
-- Turn images back to 1024x1024, then scale them down for saving actually resized images to S3.
+- Make an actual SaaS landing page

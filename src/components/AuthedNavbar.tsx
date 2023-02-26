@@ -1,17 +1,20 @@
-import React from "react";
-
-import { signIn, signOut, useSession } from "next-auth/react";
+import { Session } from "next-auth";
+import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-import { api } from "../utils/api";
 import { useRouter } from "next/router";
+import { api } from "../utils/api";
 
-const Navbar = () => {
-  const { data: sessionData } = useSession();
+type Props = {
+  sessionData: Session;
+};
+const AuthedNavbar = ({ sessionData }: Props) => {
   const { data: currentUser } = api.user.currentUser.useQuery(undefined, {
     enabled: !!sessionData,
   });
+
   const { mutateAsync: createCheckoutSession } =
     api.stripe.createCheckoutSession.useMutation();
+
   const { push } = useRouter();
 
   const handleGetCredits = async (priceId: string) => {
@@ -20,6 +23,7 @@ const Navbar = () => {
       push(checkoutUrl);
     }
   };
+
   return (
     <nav className="bg-base-50 navbar self-start">
       <div className="navbar-start">
@@ -56,7 +60,7 @@ const Navbar = () => {
             </li>
             <li className="divider"></li>
             <li>
-              {currentUser && <span>Credits: {currentUser.credits}</span>}
+              <span>Credits: {(currentUser && currentUser.credits) ?? 0}</span>
             </li>
             <ul className="space-y-4">
               <li className="divider"></li>
@@ -68,7 +72,7 @@ const Navbar = () => {
                       handleGetCredits("price_1MeQ4oE3Wv1FtO4psJEOuIUp")
                     }
                   >
-                    {"Buy Credits"}
+                    Buy Credits
                   </a>
                 )}
               </li>
@@ -104,17 +108,15 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end hidden space-x-4 lg:flex">
-        {currentUser && (
-          <>
-            <span>Credits: {currentUser.credits}</span>
-            <a
-              className="btn-primary btn"
-              onClick={() => handleGetCredits("price_1MeQ4oE3Wv1FtO4psJEOuIUp")}
-            >
-              {"Buy Credits"}
-            </a>
-          </>
-        )}
+        <>
+          <span>Credits: {(currentUser && currentUser.credits) ?? 0}</span>
+          <a
+            className="btn-primary btn"
+            onClick={() => handleGetCredits("price_1MeQ4oE3Wv1FtO4psJEOuIUp")}
+          >
+            {"Buy Credits"}
+          </a>
+        </>
         <button
           className="btn"
           onClick={sessionData ? () => signOut() : () => signIn()}
@@ -126,4 +128,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AuthedNavbar;

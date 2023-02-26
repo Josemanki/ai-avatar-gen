@@ -8,7 +8,9 @@ import { api } from "../utils/api";
 
 const Community: NextPage = () => {
   const { data: communityAvatars, isLoading: isCommunityAvatarsLoading } =
-    api.avatars.getCommunityAvatars.useQuery();
+    api.avatars.getCommunityAvatars.useQuery(undefined, {
+      refetchOnWindowFocus: false,
+    });
   return (
     <main className="mx-auto flex flex-col">
       <>

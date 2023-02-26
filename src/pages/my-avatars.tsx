@@ -1,8 +1,9 @@
-import { NextPage } from "next";
+import { GetServerSidePropsContext, NextPage } from "next";
 import Link from "next/link";
 import Grid from "../components/Grid";
 import Spinner from "../components/Spinner";
 import { env } from "../env.mjs";
+import { getServerAuthSession } from "../server/auth";
 import { api } from "../utils/api";
 
 const MyAvatars: NextPage = () => {
@@ -46,5 +47,22 @@ const MyAvatars: NextPage = () => {
     </main>
   );
 };
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const session = await getServerAuthSession(ctx);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 
 export default MyAvatars;

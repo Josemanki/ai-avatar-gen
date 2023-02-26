@@ -1,10 +1,11 @@
 import { z } from "zod";
-import { Configuration, OpenAIApi } from "openai";
+import { Configuration, ImagesResponseDataInner, OpenAIApi } from "openai";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { v4 as uuid } from "uuid";
 import { s3Client } from "../../aws/client";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { env } from "../../../env.mjs";
+import { resizeImage } from "../../../utils/image";
 
 const configuration = new Configuration({
   apiKey: env.OPENAI_KEY,
@@ -57,7 +58,7 @@ export const generateRouter = createTRPCRouter({
       const response = await openai.createImage({
         prompt: generatePrompt(input),
         n: input.amount,
-        size: "256x256",
+        size: "1024x1024",
         response_format: "b64_json",
       });
 
@@ -66,13 +67,15 @@ export const generateRouter = createTRPCRouter({
       for (let i = 0; i < image_urls.length; i++) {
         const lowResUuid = uuid();
         const highResUuid = uuid();
-        const element = image_urls[i];
-        const base64 = element.b64_json;
+        const element = image_urls[i] as ImagesResponseDataInner;
+        const base64 = element.b64_json as string;
 
-        const base64Data = Buffer.from(
+        const base64Buffer = Buffer.from(
           base64.replace(/^data:image\/\w+;base64,/, ""),
           "base64"
         );
+
+        const lowResImageBuffer = await resizeImage(base64Buffer, 256);
 
         await s3Client.send(
           new PutObjectCommand({
@@ -80,7 +83,7 @@ export const generateRouter = createTRPCRouter({
             Key: `low-res/${lowResUuid}`,
             ContentType: "image/png",
             ContentEncoding: "base64",
-            Body: base64Data,
+            Body: lowResImageBuffer,
           })
         );
 
@@ -90,7 +93,7 @@ export const generateRouter = createTRPCRouter({
             Key: `high-res/${highResUuid}`,
             ContentType: "image/png",
             ContentEncoding: "base64",
-            Body: base64Data,
+            Body: base64Buffer,
           })
         );
 

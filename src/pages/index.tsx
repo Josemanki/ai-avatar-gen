@@ -1,4 +1,5 @@
 import { type NextPage } from "next";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -12,7 +13,9 @@ const Home: NextPage = () => {
             This application will let you generate exciting avatars using AI,
             just imagine what you want, and it'll know what to show!
           </p>
-          <button className="btn-secondary btn">Get Started</button>
+          <Link href={"generate"} className="btn-secondary btn">
+            Get Started
+          </Link>
         </div>
       </main>
     </>
