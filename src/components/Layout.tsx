@@ -26,7 +26,7 @@ const Layout = ({ children }: Props) => {
           <UnauthedNavbar />
         )}
       </header>
-      <div className="min-h-[calc(100vh-120px)] bg-gradient-to-b from-base-100 to-base-300 px-4 pb-12 text-white">
+      <div className="mt-6 min-h-[calc(100vh-120px)] bg-gradient-to-b from-base-100 to-base-300 px-4 pb-12 text-white">
         <div className="mx-auto sm:max-w-3xl">{children}</div>
       </div>
       <Footer />

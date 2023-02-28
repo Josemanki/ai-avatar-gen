@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {},
   },
+  // @ts-ignore
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   safelist: [
     {
