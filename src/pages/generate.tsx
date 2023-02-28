@@ -138,7 +138,7 @@ const Generate: NextPage = () => {
               isGenerateLoading ? " loading" : ""
             }`}
             disabled={!sessionData || !canSubmitForm || isGenerateLoading}
-            onClick={void handleGenerate}
+            onClick={() => void handleGenerate()}
           >
             {isGenerateLoading
               ? "Generating"
