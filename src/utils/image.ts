@@ -14,8 +14,8 @@ export const resizeImage = async (
   }
 };
 
-export const downloadImage = (highResId: string, name: string) => {
-  fetch(`${env.NEXT_PUBLIC_AWS_BUCKET_URL}/high-res/${highResId}`, {
+export const downloadImage = async (highResId: string, name: string) => {
+  await fetch(`${env.NEXT_PUBLIC_AWS_BUCKET_URL}/high-res/${highResId}`, {
     method: "GET",
     headers: {
       "Content-Type": "image/png",

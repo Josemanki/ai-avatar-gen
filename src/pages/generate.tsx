@@ -1,5 +1,6 @@
-import { NextPage } from "next";
+import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useState } from "react";
 import Grid from "../components/Grid";
 import RadioInput from "../components/RadioInput";
@@ -38,8 +39,8 @@ const Generate: NextPage = () => {
     });
   };
 
-  const handleGenerate = () => {
-    refetch();
+  const handleGenerate = async () => {
+    await refetch();
   };
 
   const utils = api.useContext();
@@ -52,7 +53,7 @@ const Generate: NextPage = () => {
   } = api.generate.generate.useQuery(formState, {
     enabled: false,
     onSuccess() {
-      utils.user.currentUser.invalidate();
+      void utils.user.currentUser.invalidate();
     },
   });
 
@@ -133,11 +134,11 @@ const Generate: NextPage = () => {
             />
           </fieldset>
           <button
-            className={`btn-secondary btn mb-8 ${
-              isGenerateLoading && "loading"
+            className={`btn-secondary btn mb-8${
+              isGenerateLoading ? " loading" : ""
             }`}
             disabled={!sessionData || !canSubmitForm || isGenerateLoading}
-            onClick={handleGenerate}
+            onClick={void handleGenerate}
           >
             {isGenerateLoading
               ? "Generating"
@@ -153,11 +154,13 @@ const Generate: NextPage = () => {
             <Grid>
               {generateResult.map((image) => {
                 return (
-                  <img
+                  <Image
                     key={image.b64_json}
                     className="basis-1/6 rounded-3xl"
-                    src={`data:image/png;base64, ${image.b64_json}`}
+                    src={`data:image/png;base64, ${image.b64_json as string}`}
                     alt="Generated image"
+                    width={256}
+                    height={256}
                   />
                 );
               })}

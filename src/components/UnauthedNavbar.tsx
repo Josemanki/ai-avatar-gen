@@ -37,7 +37,7 @@ const UnauthedNavbar = () => {
             <ul className="space-y-4">
               <li className="divider"></li>
               <li>
-                <button className="btn" onClick={() => signIn()}>
+                <button className="btn" onClick={() => void signIn()}>
                   Sign In
                 </button>
               </li>
@@ -69,7 +69,7 @@ const UnauthedNavbar = () => {
         </ul>
       </div>
       <div className="navbar-end hidden space-x-4 lg:flex">
-        <button className="btn" onClick={() => signIn()}>
+        <button className="btn" onClick={() => void signIn()}>
           Sign In
         </button>
       </div>

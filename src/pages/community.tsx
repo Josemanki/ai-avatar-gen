@@ -1,4 +1,5 @@
-import { NextPage } from "next";
+import { type NextPage } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Grid from "../components/Grid";
@@ -16,7 +17,7 @@ const Community: NextPage = () => {
       <>
         <h1 className="text-3xl font-bold">Community Icons</h1>
         <h2 className="text-md mt-2">
-          Let's find out what the community has made!
+          Let&apos;s find out what the community has made!
         </h2>
       </>
       {isCommunityAvatarsLoading ? (
@@ -25,8 +26,8 @@ const Community: NextPage = () => {
         </div>
       ) : communityAvatars && !communityAvatars.length ? (
         <p className="mt-8 text-center">
-          The community still hasn't generated any avatars, do you want to be
-          the first to{" "}
+          The community still hasn&apos;t generated any avatars, do you want to
+          be the first to{" "}
           <Link className="link" href={"generate"}>
             generate some?
           </Link>
@@ -36,12 +37,14 @@ const Community: NextPage = () => {
           <Grid>
             {communityAvatars.map((image) => {
               return (
-                <img
+                <Image
                   key={image.lowResURL}
                   className="rounded-3xl"
                   src={`${env.NEXT_PUBLIC_AWS_BUCKET_URL}/low-res/${image.lowResURL}`}
                   alt={image.prompt}
                   title={image.prompt}
+                  width="256"
+                  height="256"
                 />
               );
             })}

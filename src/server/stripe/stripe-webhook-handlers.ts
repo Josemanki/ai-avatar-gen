@@ -68,7 +68,7 @@ export const handleSuccessfulPayment = async ({
         id: user.id,
       },
       data: {
-        credits: { increment: 50 },
+        credits: { increment: 20 },
       },
     });
   }

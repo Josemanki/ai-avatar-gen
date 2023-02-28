@@ -1,4 +1,4 @@
-import { Avatar } from "@prisma/client";
+import type { Avatar } from "@prisma/client";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const avatarRouter = createTRPCRouter({

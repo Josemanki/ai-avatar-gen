@@ -68,7 +68,7 @@ export const authOptions: NextAuthOptions = {
     createUser: async ({ user }) => {
       await stripe.customers
         .create({
-          email: user.email!,
+          email: user.email as string,
         })
         .then(async (customer) => {
           return prisma.user.update({

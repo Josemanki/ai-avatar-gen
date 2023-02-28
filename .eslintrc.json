@@ -7,6 +7,9 @@
       "files": ["*.ts", "*.tsx"],
       "parserOptions": {
         "project": "tsconfig.json"
+      },
+      "rules": {
+        "@typescript-eslint/restrict-template-expressions": "off"
       }
     }
   ],
@@ -17,6 +20,11 @@
   "plugins": ["@typescript-eslint"],
   "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
   "rules": {
-    "@typescript-eslint/consistent-type-imports": "warn"
+    "@typescript-eslint/consistent-type-imports": "warn",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {"checksVoidReturn": {"attributes": false}}
+    ]
   }
 }

@@ -27,11 +27,7 @@ export default async function handler(
     let event: Stripe.Event;
 
     try {
-      event = stripe.webhooks.constructEvent(
-        buf,
-        sig as string,
-        webhookSecret!
-      );
+      event = stripe.webhooks.constructEvent(buf, sig as string, webhookSecret);
 
       // Handle the event
       switch (event.type) {
@@ -50,7 +46,7 @@ export default async function handler(
 
       res.json({ received: true });
     } catch (err) {
-      res.status(400).send(`Webhook Error: ${(err as any).message}`);
+      res.status(400).send(err);
       return;
     }
   } else {

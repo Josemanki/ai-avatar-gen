@@ -20,5 +20,13 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ai-avatar-gen.s3.eu-central-1.amazonaws.com",
+      },
+    ],
+  },
 };
 export default config;

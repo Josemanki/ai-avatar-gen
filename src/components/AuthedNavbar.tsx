@@ -1,4 +1,4 @@
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,7 +21,7 @@ const AuthedNavbar = ({ sessionData }: Props) => {
   const handleGetCredits = async (priceId: string) => {
     const { checkoutUrl } = await createCheckoutSession(priceId);
     if (checkoutUrl) {
-      push(checkoutUrl);
+      await push(checkoutUrl);
     }
   };
 
@@ -70,7 +70,7 @@ const AuthedNavbar = ({ sessionData }: Props) => {
                   <a
                     className="btn-primary btn text-white"
                     onClick={() =>
-                      handleGetCredits("price_1MeQ4oE3Wv1FtO4psJEOuIUp")
+                      void handleGetCredits("price_1MeQ4oE3Wv1FtO4psJEOuIUp")
                     }
                   >
                     Buy Credits
@@ -80,7 +80,9 @@ const AuthedNavbar = ({ sessionData }: Props) => {
               <li>
                 <button
                   className="btn"
-                  onClick={sessionData ? () => signOut() : () => signIn()}
+                  onClick={
+                    sessionData ? () => void signOut() : () => void signIn()
+                  }
                 >
                   {sessionData ? "Sign Out" : "Sign In"}
                 </button>
@@ -120,14 +122,16 @@ const AuthedNavbar = ({ sessionData }: Props) => {
           <span>Credits: {(currentUser && currentUser.credits) ?? 0}</span>
           <a
             className="btn-primary btn"
-            onClick={() => handleGetCredits("price_1MeQ4oE3Wv1FtO4psJEOuIUp")}
+            onClick={() =>
+              void handleGetCredits("price_1MeQ4oE3Wv1FtO4psJEOuIUp")
+            }
           >
             {"Buy Credits"}
           </a>
         </>
         <button
           className="btn"
-          onClick={sessionData ? () => signOut() : () => signIn()}
+          onClick={sessionData ? () => void signOut() : () => void signIn()}
         >
           {sessionData ? "Sign Out" : "Sign In"}
         </button>

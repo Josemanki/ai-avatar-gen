@@ -1,9 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-type Props = {};
-
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
     <div className="bg-dark-gray flex h-24 items-center justify-between px-4 text-white lg:px-12">
       <div>© 2023 AI Avatar Generator</div>

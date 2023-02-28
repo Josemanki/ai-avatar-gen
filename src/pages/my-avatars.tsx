@@ -1,4 +1,5 @@
-import { GetServerSidePropsContext, NextPage } from "next";
+import type { GetServerSidePropsContext, NextPage } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Download } from "react-feather";
 import Grid from "../components/Grid";
@@ -23,7 +24,7 @@ const MyAvatars: NextPage = () => {
         </div>
       ) : avatars && !avatars.length ? (
         <p className="mt-8 text-center">
-          You don't have any avatars yet, you might want to go{" "}
+          You don&apos;t have any avatars yet, you might want to go{" "}
           <Link className="link" href={"generate"}>
             generate some!
           </Link>
@@ -33,19 +34,21 @@ const MyAvatars: NextPage = () => {
           <Grid>
             {avatars.map((image) => {
               return (
-                <div className="relative">
+                <div className="relative" key={image.id}>
                   <div
                     className="absolute right-1 top-1 rounded-full p-1 hover:cursor-pointer hover:bg-slate-300 hover:bg-opacity-50"
                     onClick={() => downloadImage(image.highResURL, image.id)}
                   >
                     <Download />
                   </div>
-                  <img
+                  <Image
                     key={image.lowResURL}
                     className="rounded-3xl"
                     src={`${env.NEXT_PUBLIC_AWS_BUCKET_URL}/low-res/${image.lowResURL}`}
                     alt={image.prompt}
                     title={image.prompt}
+                    width={256}
+                    height={256}
                   />
                 </div>
               );

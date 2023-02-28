@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Configuration, ImagesResponseDataInner, OpenAIApi } from "openai";
+import { Configuration, type ImagesResponseDataInner, OpenAIApi } from "openai";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { v4 as uuid } from "uuid";
 import { s3Client } from "../../aws/client";
