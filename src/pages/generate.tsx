@@ -62,15 +62,13 @@ const Generate: NextPage = () => {
   return (
     <main className="mx-auto flex flex-col">
       <>
-        <h1 className="text-3xl font-bold text-white">
-          Configure your prompts
-        </h1>
+        <h1 className="text-3xl font-bold">Configure your prompts</h1>
         <form
           onSubmit={(e) => e.preventDefault()}
           className="mt-6 flex flex-col gap-4"
         >
           <fieldset className="mb-4 flex flex-col">
-            <label className="text-white">Main icon object</label>
+            <label>Main icon object</label>
             <input
               type="text"
               name="prompt"
@@ -81,7 +79,7 @@ const Generate: NextPage = () => {
             />
           </fieldset>
           <fieldset className="mb-4">
-            <label className="text-white">Choose a color</label>
+            <label>Choose a color</label>
             <div className="mt-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4">
               {avatarColors.map((item) => (
                 <RadioInput
@@ -95,7 +93,7 @@ const Generate: NextPage = () => {
             </div>
           </fieldset>
           <fieldset className="mb-4">
-            <label className="text-white">Style</label>
+            <label>Style</label>
             <div className="mt-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4">
               {avatarStyles.map((item) => (
                 <RadioInput
@@ -109,7 +107,7 @@ const Generate: NextPage = () => {
             </div>
           </fieldset>
           <fieldset className="mb-4">
-            <label className="text-white">Choose a shape</label>
+            <label>Choose a shape</label>
             <div className="mt-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4">
               {avatarShapes.map((item) => (
                 <RadioInput
@@ -122,7 +120,7 @@ const Generate: NextPage = () => {
             </div>
           </fieldset>
           <fieldset className="mb-4 flex flex-col">
-            <label className="text-white">Amount of icons (max: 5)</label>
+            <label>Amount of icons (max: 5)</label>
             <input
               type="number"
               placeholder="Enter an amount..."
@@ -141,15 +139,17 @@ const Generate: NextPage = () => {
             disabled={!sessionData || !canSubmitForm || isGenerateLoading}
             onClick={handleGenerate}
           >
-            {sessionData ? "Generate!" : "Must sign in!"}
+            {isGenerateLoading
+              ? "Generating"
+              : sessionData
+              ? "Generate!"
+              : "Must sign in!"}
           </button>
         </form>
         {generateResult && (
           <>
             <div className="divider"></div>
-            <h2 className="my-8 text-center text-2xl text-white">
-              Your avatars:
-            </h2>
+            <h2 className="my-8 text-center text-2xl">Your avatars:</h2>
             <Grid>
               {generateResult.map((image) => {
                 return (

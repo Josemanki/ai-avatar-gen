@@ -79,7 +79,7 @@ const AuthedNavbar = ({ sessionData }: Props) => {
               </li>
               <li>
                 <button
-                  className="btn-primary btn"
+                  className="btn"
                   onClick={sessionData ? () => signOut() : () => signIn()}
                 >
                   {sessionData ? "Sign Out" : "Sign In"}

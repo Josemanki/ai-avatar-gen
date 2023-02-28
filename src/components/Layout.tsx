@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import React from "react";
 import AuthedNavbar from "./AuthedNavbar";
+import Footer from "./Footer";
 import UnauthedNavbar from "./UnauthedNavbar";
 
 type Props = {
@@ -25,9 +26,10 @@ const Layout = ({ children }: Props) => {
           <UnauthedNavbar />
         )}
       </header>
-      <div className="min-h-[calc(100vh-96px)] bg-gradient-to-b from-base-100 to-base-300 px-4 pt-6 pb-12">
+      <div className="min-h-[calc(100vh-120px)] bg-gradient-to-b from-base-100 to-base-300 px-4 pb-12 text-white">
         <div className="mx-auto sm:max-w-3xl">{children}</div>
       </div>
+      <Footer />
     </>
   );
 };

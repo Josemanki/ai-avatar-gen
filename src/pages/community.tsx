@@ -14,8 +14,8 @@ const Community: NextPage = () => {
   return (
     <main className="mx-auto flex flex-col">
       <>
-        <h1 className="text-3xl font-bold text-white">Community Icons</h1>
-        <h2 className="text-md mt-2 text-white">
+        <h1 className="text-3xl font-bold">Community Icons</h1>
+        <h2 className="text-md mt-2">
           Let's find out what the community has made!
         </h2>
       </>
@@ -24,7 +24,7 @@ const Community: NextPage = () => {
           <Spinner />
         </div>
       ) : communityAvatars && !communityAvatars.length ? (
-        <p className="mt-8 text-center text-white">
+        <p className="mt-8 text-center">
           The community still hasn't generated any avatars, do you want to be
           the first to{" "}
           <Link className="link" href={"generate"}>
