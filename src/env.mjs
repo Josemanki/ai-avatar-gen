@@ -28,6 +28,8 @@ const server = z.object({
   AWS_CLIENT_SECRET_KEY: z.string(),
   APP_AWS_REGION: z.string(),
   AWS_S3_BUCKET_NAME: z.string(),
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
 });
 
 /**
@@ -65,6 +67,8 @@ const processEnv = {
   AWS_S3_BUCKET_NAME: process.env.AWS_S3_BUCKET_NAME,
   NEXT_PUBLIC_AWS_S3_BUCKET_NAME: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
   NEXT_PUBLIC_AWS_BUCKET_URL: process.env.NEXT_PUBLIC_AWS_BUCKET_URL,
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 };
 
 // Don't touch the part below
