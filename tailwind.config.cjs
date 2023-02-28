@@ -16,4 +16,7 @@ module.exports = {
       variants: ["checked"],
     },
   ],
+  daisyui: {
+    themes: ["dark"],
+  },
 };
