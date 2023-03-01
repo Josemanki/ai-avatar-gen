@@ -21,7 +21,7 @@ export const stripeRouter = createTRPCRouter({
       const baseUrl =
         process.env.NODE_ENV === "development"
           ? `http://${req.headers.host}`
-          : `https://${req.headers.host}`;
+          : `https://main.d15x50bny6mycw.amplifyapp.com`;
 
       const checkoutSession = await stripe.checkout.sessions.create({
         customer: customerId,
@@ -61,7 +61,7 @@ export const stripeRouter = createTRPCRouter({
     const baseUrl =
       process.env.NODE_ENV === "development"
         ? `http://${req.headers.host}`
-        : `https://${req.headers.host}`;
+        : `https://main.d15x50bny6mycw.amplifyapp.com`;
 
     const stripeBillingPortalSession =
       await stripe.billingPortal.sessions.create({

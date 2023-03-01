@@ -20,6 +20,6 @@ export default createNextApiHandler({
 
 export const config = {
   api: {
-    responseLimit: "30mb",
+    responseLimit: "15mb",
   },
 };

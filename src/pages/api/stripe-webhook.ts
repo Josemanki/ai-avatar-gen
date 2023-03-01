@@ -6,6 +6,7 @@ import { buffer } from "micro";
 import { handleSuccessfulPayment } from "../../server/stripe/stripe-webhook-handlers";
 import { stripe } from "../../server/stripe/client";
 import { env } from "../../env.mjs";
+import getRawBody from "raw-body";
 
 // Stripe requires the raw body to construct the event.
 export const config = {
@@ -21,7 +22,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const buf = await buffer(req);
+    const buf = await getRawBody(req);
     const sig = req.headers["stripe-signature"];
 
     let event: Stripe.Event;
@@ -32,8 +33,6 @@ export default async function handler(
       // Handle the event
       switch (event.type) {
         case "payment_intent.succeeded":
-          // Used to provision services after the trial has ended.
-          // The status of the invoice will show up as paid. Store the status in your database to reference when a user accesses your service to avoid hitting rate limits.
           await handleSuccessfulPayment({
             event,
             prisma,
