@@ -96,7 +96,7 @@ export const landingPageActionItems = [
     Icon: Image,
     title: "High quality avatars",
     description:
-      "All our avatars are generated on a 1024x1024 format, which is more than suitable for great quality on any service out there.",
+      "All our avatars are generated on a 512x512 format, which is more than suitable for great quality on any service out there.",
   },
   {
     Icon: DollarSign,
