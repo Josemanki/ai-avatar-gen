@@ -10,7 +10,7 @@ export const s3Router = createTRPCRouter({
     .input(z.object({ fileName: z.string() }))
     .query(async ({ input }) => {
       const putObjectCommand = new PutObjectCommand({
-        Bucket: env.AWS_S3_BUCKET_NAME,
+        Bucket: env.APP_AWS_S3_BUCKET_NAME,
         Key: input.fileName,
       });
       const url = await getSignedUrl(s3Client, putObjectCommand, {

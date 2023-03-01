@@ -79,7 +79,7 @@ export const generateRouter = createTRPCRouter({
 
         await s3Client.send(
           new PutObjectCommand({
-            Bucket: env.AWS_S3_BUCKET_NAME,
+            Bucket: env.APP_AWS_S3_BUCKET_NAME,
             Key: `low-res/${lowResUuid}`,
             ContentType: "image/png",
             ContentEncoding: "base64",
@@ -89,7 +89,7 @@ export const generateRouter = createTRPCRouter({
 
         await s3Client.send(
           new PutObjectCommand({
-            Bucket: env.AWS_S3_BUCKET_NAME,
+            Bucket: env.APP_AWS_S3_BUCKET_NAME,
             Key: `high-res/${highResUuid}`,
             ContentType: "image/png",
             ContentEncoding: "base64",
