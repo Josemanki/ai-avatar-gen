@@ -1,28 +1,27 @@
-# Create T3 App
+# AI Avatar Generator
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Avatar Generator leveraging AI services to create, store and serve generated avatars. Features a community page where users are also able to see what the community has made :).
 
-## What's next? How do I make an app with this?
+## So how did you build this?
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
-
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+The main tech used was the following:
 
 - [Next.js](https://nextjs.org)
 - [NextAuth.js](https://next-auth.js.org)
 - [Prisma](https://prisma.io)
 - [Tailwind CSS](https://tailwindcss.com)
 - [tRPC](https://trpc.io)
+- [Stripe](https://stripe.com/)
+- [OpenAI Dall-E](https://openai.com/product/dall-e-2)
 
-## Learn More
+## Installation and setup
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- Install all dependencies by running `yarn`.
+- Make a `.env` file and populate it with the contents of `.env.example`.
+- You might need to populate or delete Discord and/or Google OAuth providers in `src/server/auth.ts`.
+- After populating your database URL in `.env`, you will have to run `npx prisma push` in order to push the schema to your desired database provider. Do know that this application is configured to run with Postgres and you might have to tweak the application to run it with other services.
+- The default command for starting the application is `yarn dev`.
 
 ## How do I deploy this?
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- Deployment, due to how the application works, is best suited on AWS since Lambdas have longer timeouts and will endure the big chunk of data coming from Dall-E, so I can recommend AWS Amplify since it's quick, easy, and most likely free.

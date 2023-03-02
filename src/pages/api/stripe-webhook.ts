@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { prisma } from "../../server/db";
 import type Stripe from "stripe";
-import { buffer } from "micro";
 import { handleSuccessfulPayment } from "../../server/stripe/stripe-webhook-handlers";
 import { stripe } from "../../server/stripe/client";
 import { env } from "../../env.mjs";
