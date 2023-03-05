@@ -31,6 +31,10 @@ const generatePrompt = (input: TGenerateInput) => {
       return `${input.prompt} on a ${input.color} gradient background, as a ${input.shape} icon, polygon art`;
     case "Metallic":
       return `A 3D render of ${input.prompt} with a gradient ${input.color} background as a ${input.shape} icon, metallic art`;
+    case "Flat":
+      return `A professional vector art icon of ${input.color}, on a dark ${input.shape} gradient background with vivid ${input.color} colors`;
+    case "Cartoon":
+      return `A professional cartoon picture of ${input.prompt} on a green ${input.shape} background`;
     default:
       return `${input.prompt} 3D render on a ${input.color} gradient background, with a ${input.style} style, as a ${input.shape} icon`;
   }
