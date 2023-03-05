@@ -13,7 +13,7 @@ const Community: NextPage = () => {
       refetchOnWindowFocus: false,
     });
   return (
-    <main className="mx-auto flex flex-col">
+    <main className="mx-auto mt-6 flex flex-col">
       <>
         <h1 className="text-3xl font-bold">Community Icons</h1>
         <h2 className="text-md mt-2">

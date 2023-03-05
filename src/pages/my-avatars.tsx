@@ -13,7 +13,7 @@ const MyAvatars: NextPage = () => {
   const { data: avatars, isLoading: isAvatarsLoading } =
     api.avatars.getUserAvatars.useQuery();
   return (
-    <main className="mx-auto flex flex-col">
+    <main className="mx-auto mt-6 flex flex-col">
       <>
         <h1 className="text-3xl font-bold">Your Avatars</h1>
         <h2 className="text-md mt-2">Your beautiful creations in one place!</h2>
